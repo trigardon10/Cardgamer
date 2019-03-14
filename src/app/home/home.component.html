@@ -1,0 +1,15 @@
+<div *ngFor="let game of data.games" class="panel panel-primary">
+  <div class="panel-heading">
+    <p class="panel-title">{{game.name}}</p>
+  </div>
+  <div class="panel-body">
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">{{game.date}}</li>
+    <li class="list-group-item">Anzahl Spieler: {{game.players.length}}</li>
+    <li class="list-group-item">Gewinner: {{game.winner ? game.winner.name : "-"}}</li>
+  </ul>
+</div>
+
+<button (click)="newGame()" class="btn btn-primary">Neues Spiel</button>
+<a routerLink="../players" class="btn btn-primary">Spielerdaten anzeigen</a>

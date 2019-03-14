@@ -1,0 +1,15 @@
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>Games played</th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let player of data.player">
+        <td>{{player.name}}</td>
+        <td>{{player.gamesPlayed||0}}</td>
+        <td (click)="">edit</td>
+    </tr>
+</table>
+
+<a routerLink="../home" class="btn btn-primary">back</a>
+<button (click)="addPlayer()" class="btn btn-primary">Spieler hinzufügen</button>
