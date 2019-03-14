@@ -1,4 +1,4 @@
-<div *ngFor="let game of data.games" class="panel panel-primary">
+<div *ngFor="let game of data.games" class="panel panel-primary" (click)="gameClicked(game)">
   <div class="panel-heading">
     <p class="panel-title">{{game.name}}</p>
   </div>

@@ -1,0 +1,7 @@
+<div>Name:</div>
+<input [(ngModel)]="game.name">
+<div>Spieler:</div>
+<div *ng-for="let p of player" (click)="togglePlayer(p)" [ngStyle]="{'background-color': game.players.includes(p.id) ? '#987dcb' : ''}">{{p.name}}</div>
+
+<a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+<!-- <button (click)="addRound()" class="btn btn-primary">Runde hinzufügen</button> -->
