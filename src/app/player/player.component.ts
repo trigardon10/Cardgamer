@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-player',
@@ -9,16 +10,20 @@ import { DataService } from '../services/data.service';
 })
 export class PlayerComponent {
   data = this.dataService.getData();
-  index:number = 0;
 
-  constructor(private dataService:DataService) {
+  constructor(private dataService:DataService, private router: Router) {
   
   }
 
   addPlayer():void{
-    this.data.player.push({
-      id:this.index++,
+    this.data.player.unshift({
+      id:new Date().getTime(),
       name:"Neuer Spieler"
     })
+    this.dataService.save();
+  }
+
+  playerClicked(player){
+    this.router.navigate(["../editplayer", player.id])
   }
 }

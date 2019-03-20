@@ -3,14 +3,15 @@ import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-editgame',
-  templateUrl: './editgame.component.html',
-  styleUrls: ['./editgame.component.scss'],
+  selector: 'app-editround',
+  templateUrl: './editround.component.html',
+  styleUrls: ['./editround.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EditGameComponent implements OnInit {
+export class EditRoundComponent implements OnInit {
   player = this.dataService.getData().player;
   game = null;
+  round = null;
 
   constructor(private dataService:DataService, private route: ActivatedRoute) {
   
@@ -22,18 +23,8 @@ export class EditGameComponent implements OnInit {
       .subscribe(
         params => {
           this.game = this.dataService.getGameById(parseInt(params['gameid']));
+          this.round = this.game.rounds[params['roundindex']]
         }
       );
     };
-
-  togglePlayer(player){
-    var index = this.game.players.indexOf(player.id);
-    if(index >= 0){
-      this.game.players.splice(index, 1);
-    }
-    else{
-      this.game.players.push(player.id);
-    }
-    this.dataService.save();
-  }
 }

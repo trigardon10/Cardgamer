@@ -1,7 +1,17 @@
+<h2>Spiel Bearbeiten</h2>
+
 <div>Name:</div>
 <input [(ngModel)]="game.name">
 <div>Spieler:</div>
-<div *ng-for="let p of player" (click)="togglePlayer(p)" [ngStyle]="{'background-color': game.players.includes(p.id) ? '#987dcb' : ''}">{{p.name}}</div>
+<div style="display:flex" *ngFor="let p of player">
+    <div style="flex:1 1 100%" (click)="togglePlayer(p)" [ngStyle]="{'color': game.players.includes(p.id) ? '#987dcb' : ''}">{{p.name}}</div>
+    <!-- Icons sind nicht im Projekt vorhanden -->
+    <div>
+        <span *ngIf="game.winner == p.id" class="glyphicon glyphicon-star" (click)="game.winner = null">w</span>
+        <span *ngIf="game.winner != p.id" class="glyphicon glyphicon-star-empty" (click)="game.winner = p.id">n</span>
+    </div>
+</div>
 
-<a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
-<!-- <button (click)="addRound()" class="btn btn-primary">Runde hinzufügen</button> -->
+<div>
+    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+</div>

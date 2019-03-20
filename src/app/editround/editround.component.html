@@ -1,0 +1,12 @@
+<h2>Runde Bearbeiten</h2>
+
+<div *ngFor="let p of player">
+    <div *ngIf="game.players.includes(p.id)">
+        <label>{{p.name}}</label>
+        <input type="number" [(ngModel)]="round[p.id]">
+    </div>
+</div>
+
+<div>
+    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+</div>

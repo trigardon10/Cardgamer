@@ -1,12 +1,19 @@
+<h2>{{game.name}}</h2>
+
 <table class="table">
     <tr>
         <th *ngFor="let playerid of game.players">{{playermap[playerid].name}}</th>
     </tr>
-    <tr *ngFor="let round of game.rounds">
-        <td *ngFor="let playerid of game.players">{{round.playerid}}</td>
+    <tr *ngFor="let round of game.rounds; let i = index" (click)="roundClicked(i)">
+        <td *ngFor="let playerid of game.players">{{round[playerid] || 0}}</td>
+    </tr>
+    <tr style="font-weight:600">
+        <td *ngFor="let playerid of game.players">{{getPoints(playerid)}}</td>
     </tr>
 </table>
 
-<a routerLink="/home" class="btn btn-primary">back</a>
-<a routerLink="/editgame/{{game.id}}" class="btn btn-primary">Spiel bearbeiten</a>
-<button (click)="addRound()" class="btn btn-primary">Runde hinzufügen</button>
+<div>
+    <a routerLink="/home" class="btn btn-primary">back</a>
+    <a routerLink="/editgame/{{game.id}}" class="btn btn-primary">Spiel bearbeiten</a>
+    <button (click)="addRound()" class="btn btn-primary">Runde hinzufügen</button>
+</div>

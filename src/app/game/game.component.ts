@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-game',
@@ -10,10 +10,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class GameComponent implements OnInit {
   playermap = this.dataService.getPlayerAsMap();
-  index:number = 0;
   game = null;
 
-  constructor(private dataService:DataService, private route: ActivatedRoute) {
+  constructor(private dataService:DataService, private route: ActivatedRoute, private router: Router) {
   
   }
 
@@ -31,8 +30,23 @@ export class GameComponent implements OnInit {
     };
 
   addRound():void{
-    this.game.rounds.push({
+    var roundobj = {};
+    for(var i = 0; i < this.game.players.length; i++){
+      roundobj[this.game.players[i]] = 0;
+    }
+    this.game.rounds.push(roundobj);
+    this.dataService.save();
+  }
 
-    })
+  roundClicked(index){
+    this.router.navigate(["../editround", this.game.id, index])
+  }
+
+  getPoints(id):number{
+    var points:number = 0;
+    for(var i = 0; i < this.game.rounds.length; i++){
+      points += this.game.rounds[i][id] || 0;
+    }
+    return points;
   }
 }

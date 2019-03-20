@@ -10,23 +10,28 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   data = this.dataService.getData();
-  index:number = 0;
+  playermap = this.dataService.getPlayerAsMap();
 
   constructor(private dataService:DataService, private router: Router) {
   
   }
 
   newGame():void{
-    this.data.games.push({
-      id:this.index,
+    this.data.games.unshift({
+      id:new Date().getTime(),
       name:"Neues Spiel",
       players:[],
       date:new Date()
     });
-    this.index++;
+    this.dataService.save();
   }
 
   gameClicked(game):void{
     this.router.navigate(["../game", game.id])
+  }
+
+  formatDate(date):String{
+    date = new Date(date);
+    return date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
   }
 }
