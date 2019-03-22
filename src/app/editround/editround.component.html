@@ -1,12 +1,18 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+</div>
+
 <h2>Runde Bearbeiten</h2>
 
 <div *ngFor="let p of player">
     <div *ngIf="game.players.includes(p.id)">
-        <label>{{p.name}}</label>
+        <div>
+            <label>{{p.name}}</label>
+        </div>
         <input type="number" [(ngModel)]="round[p.id]">
     </div>
 </div>
 
-<div>
-    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+<div class="btn-group" role="group" aria-label="...">
+    <button (click)="delete()" class="btn btn-primary">Runde löschen</button>
 </div>

@@ -31,9 +31,9 @@ export class GameComponent implements OnInit {
 
   addRound():void{
     var roundobj = {};
-    for(var i = 0; i < this.game.players.length; i++){
-      roundobj[this.game.players[i]] = 0;
-    }
+    // for(var i = 0; i < this.game.players.length; i++){
+    //   roundobj[this.game.players[i]] = 0;
+    // }
     this.game.rounds.push(roundobj);
     this.dataService.save();
   }

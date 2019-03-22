@@ -6,7 +6,7 @@ import { filter } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class DataService {
-
+  
   data = JSON.parse(localStorage.getItem('cardgamer_data')) || {games:[], player:[]};
 
   constructor(private router: Router) {
@@ -51,5 +51,29 @@ export class DataService {
 
   save(){
     localStorage.setItem('cardgamer_data', JSON.stringify(this.data))
+  }
+
+  deleteGame(game) {
+    var index = this.data.games.indexOf(game);
+    if(index >= 0){
+      this.data.games.splice(index, 1)
+    }
+    this.save();
+  }
+
+  deleteRound(game, round){
+    var index = game.rounds.indexOf(round);
+    if(index >= 0){
+      game.rounds.splice(index, 1)
+    }
+    this.save();
+  }
+
+  deletePlayer(player) {
+    var index = this.data.player.indexOf(player);
+    if(index >= 0){
+      this.data.player.splice(index, 1)
+    }
+    this.save();
   }
 }

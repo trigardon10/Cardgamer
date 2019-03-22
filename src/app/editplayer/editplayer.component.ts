@@ -23,5 +23,10 @@ export class EditPlayerComponent implements OnInit {
           this.player = this.dataService.getPlayerById(parseInt(params['playerid']));
         }
       );
-    };
+  };
+
+  delete(){
+    this.dataService.deletePlayer(this.player);
+    history.back();
+  }
 }

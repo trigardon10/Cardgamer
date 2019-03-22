@@ -1,3 +1,7 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+</div>
+
 <h2>Spiel Bearbeiten</h2>
 
 <div>Name:</div>
@@ -12,6 +16,6 @@
     </div>
 </div>
 
-<div>
-    <a routerLink="/game/{{game.id}}" class="btn btn-primary">back</a>
+<div class="btn-group" role="group" aria-label="...">
+    <button (click)="delete()" class="btn btn-primary">Spiel löschen</button>
 </div>

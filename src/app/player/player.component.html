@@ -1,3 +1,10 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <a routerLink="/home" class="btn btn-primary">back</a>
+    <div class="btn-group" role="group">
+        <button (click)="addPlayer()" class="btn btn-primary">Spieler hinzufügen</button>
+    </div>
+</div>
+
 <h2>Spielerliste</h2>
 
 <table class="table">
@@ -11,8 +18,3 @@
         <td>{{player.gamesPlayed||0}}</td>
     </tr>
 </table>
-
-<div>
-    <a routerLink="/home" class="btn btn-primary">back</a>
-    <button (click)="addPlayer()" class="btn btn-primary">Spieler hinzufügen</button>
-</div>

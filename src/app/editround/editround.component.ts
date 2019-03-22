@@ -26,5 +26,10 @@ export class EditRoundComponent implements OnInit {
           this.round = this.game.rounds[params['roundindex']]
         }
       );
-    };
+  };
+
+  delete(){
+    this.dataService.deleteRound(this.game, this.round);
+    history.back();
+  }
 }

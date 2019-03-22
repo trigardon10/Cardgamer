@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editgame',
@@ -12,7 +12,7 @@ export class EditGameComponent implements OnInit {
   player = this.dataService.getData().player;
   game = null;
 
-  constructor(private dataService:DataService, private route: ActivatedRoute) {
+  constructor(private dataService:DataService, private route: ActivatedRoute, private router: Router) {
   
   }
 
@@ -35,5 +35,10 @@ export class EditGameComponent implements OnInit {
       this.game.players.push(player.id);
     }
     this.dataService.save();
+  }
+
+  delete(){
+    this.dataService.deleteGame(this.game);
+    this.router.navigate(["/"]);
   }
 }

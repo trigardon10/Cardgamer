@@ -1,3 +1,7 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <a routerLink="/players" class="btn btn-primary">back</a>
+</div>
+
 <h2>Spieler Bearbeiten</h2>
 
 <div>
@@ -5,6 +9,6 @@
     <input [(ngModel)]="player.name">
 </div>
 
-<div>
-    <a routerLink="/players" class="btn btn-primary">back</a>
+<div class="btn-group" role="group" aria-label="...">
+    <button (click)="delete()" class="btn btn-primary">Spieler löschen</button>
 </div>
