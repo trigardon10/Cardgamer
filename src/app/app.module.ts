@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,7 @@ import { GameComponent } from './game/game.component';
 import { EditGameComponent } from './editgame/editgame.component';
 import { EditPlayerComponent } from './editplayer/editplayer.component';
 import { EditRoundComponent } from './editround/editround.component';
+import { ButtonbarComponent } from './buttonbar/buttonbar.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { EditRoundComponent } from './editround/editround.component';
     EditGameComponent,
     EditPlayerComponent,
     EditRoundComponent,
+    ButtonbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute } from '@angular/router';
+import { ButtonService } from '../services/button.service';
 
 @Component({
   selector: 'app-editplayer',
@@ -11,8 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 export class EditPlayerComponent implements OnInit {
   player = null;
 
-  constructor(private dataService:DataService, private route: ActivatedRoute) {
-  
+  constructor(private dataService: DataService, private buttonService: ButtonService, private route: ActivatedRoute) {
+    this.buttonService.setHeadline('Spiel Bearbeiten');
+    this.buttonService.setButtons(this.getButtons());
   }
 
   ngOnInit() {
@@ -20,12 +22,18 @@ export class EditPlayerComponent implements OnInit {
       .params
       .subscribe(
         params => {
-          this.player = this.dataService.getPlayerById(parseInt(params['playerid']));
+          this.player = this.dataService.getPlayerById(parseInt(params['playerid'], 10));
         }
       );
-  };
+  }
 
-  delete(){
+  getButtons() {
+    return [
+      {name: '<', click: function() {history.back(); }}
+    ];
+  }
+
+  delete() {
     this.dataService.deletePlayer(this.player);
     history.back();
   }

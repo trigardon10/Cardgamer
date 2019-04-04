@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ButtonService } from '../services/button.service';
 
 @Component({
   selector: 'app-editgame',
@@ -12,8 +13,10 @@ export class EditGameComponent implements OnInit {
   player = this.dataService.getData().player;
   game = null;
 
-  constructor(private dataService:DataService, private route: ActivatedRoute, private router: Router) {
-  
+  constructor(
+    private dataService: DataService, private buttonService: ButtonService, private route: ActivatedRoute, private router: Router) {
+      this.buttonService.setHeadline('Spiel Bearbeiten');
+      this.buttonService.setButtons(this.getButtons());
   }
 
   ngOnInit() {
@@ -21,24 +24,29 @@ export class EditGameComponent implements OnInit {
       .params
       .subscribe(
         params => {
-          this.game = this.dataService.getGameById(parseInt(params['gameid']));
+          this.game = this.dataService.getGameById(parseInt(params['gameid'], 10));
         }
       );
-    };
+  }
 
-  togglePlayer(player){
-    var index = this.game.players.indexOf(player.id);
-    if(index >= 0){
+  getButtons() {
+    return [
+      {name: '<', click: function() {history.back(); }}
+    ];
+  }
+
+  togglePlayer(player) {
+    const index = this.game.players.indexOf(player.id);
+    if (index >= 0) {
       this.game.players.splice(index, 1);
-    }
-    else{
+    } else {
       this.game.players.push(player.id);
     }
     this.dataService.save();
   }
 
-  delete(){
+  delete() {
     this.dataService.deleteGame(this.game);
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 }

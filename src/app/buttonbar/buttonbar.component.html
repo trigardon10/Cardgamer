@@ -1,0 +1,8 @@
+<div>
+  <h3>{{$headline | async}}</h3>
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <div class="btn-group" role="group" *ngFor="let button of $buttons | async">
+      <button (click)="button.click()" class="btn btn-primary" type="button">{{button.name}}</button>
+    </div>
+  </div>
+</div>

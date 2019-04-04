@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import { DataService } from '../services/data.service';
 import { Router } from '@angular/router';
+import { ButtonService } from '../services/button.service';
 
 @Component({
   selector: 'app-home',
@@ -12,26 +13,36 @@ export class HomeComponent {
   data = this.dataService.getData();
   playermap = this.dataService.getPlayerAsMap();
 
-  constructor(private dataService:DataService, private router: Router) {
-  
+  constructor(private dataService: DataService, private buttonService: ButtonService, private router: Router) {
+    this.buttonService.setButtons(this.getButtons());
+    this.buttonService.setHeadline('Cardgamer');
   }
 
-  newGame():void{
-    this.data.games.unshift({
-      id:new Date().getTime(),
-      name:"Neues Spiel",
-      players:[],
-      date:new Date()
+  getButtons() {
+    const games = this.data.games;
+    const router = this.router;
+    const newGame = this.newGame;
+    return [
+      {name: '+', click: function() {newGame(games); }},
+      {name: 'Spieler', click: function() {router.navigate(['./players']); }}
+    ];
+  }
+
+  newGame(games): void {
+    games.unshift({
+      id: new Date().getTime(),
+      name: 'Neues Spiel',
+      players: [],
+      date: new Date()
     });
-    this.dataService.save();
   }
 
-  gameClicked(game):void{
-    this.router.navigate(["../game", game.id])
+  gameClicked(game): void {
+    this.router.navigate(['../game', game.id]);
   }
 
-  formatDate(date):String{
+  formatDate(date): String {
     date = new Date(date);
-    return date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear();
+    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
   }
 }
